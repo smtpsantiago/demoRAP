@@ -1,17 +1,41 @@
-managed; // implementation in class zbp_i_rap_travel_JB unique;
+managed;
+with draft;
 
 define behavior for ZI_RAP_Travel_JB alias Travel
+implementation in class zbp_i_rap_travel_JB unique
 persistent table zrap_atrav_JB
-lock master
-//authorization master ( instance )
+draft table zrap_dtrav_JB
+lock master total etag LastChangedAt
+authorization master ( instance )
 etag master LocalLastChangedAt
 {
   create;
   update;
   delete;
-  association _Booking { create; }
+  association _Booking { create; with draft; }
 
   field ( numbering : managed, readonly ) TravelUUID;
+  field ( readonly  ) TravelId, TotalPrice, TravelStatus;
+  field ( readonly  ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy, LocalLastChangedAt;
+  field ( mandatory ) AgencyID, CustomerID;
+
+  action ( features : instance ) acceptTravel result [1] $self;
+  action ( features : instance ) rejectTravel result [1] $self;
+  internal action recalcTotalPrice;
+
+  determination setInitialStatus    on modify { create; }
+  determination calculateTotalPrice on modify { field BookingFee, CurrencyCode; }
+  determination calculateTravelID   on save   { create; }
+
+  validation validateAgency   on save { field AgencyID; create; }
+  validation validateCustomer on save { field CustomerID; create; }
+  validation validateDates    on save { field BeginDate, EndDate; create; }
+
+  draft determine action Prepare  {
+    validation validateAgency;
+    validation validateCustomer;
+    validation validateDates;
+  }
 
   mapping for zrap_atrav_JB
   {
@@ -35,18 +59,24 @@ etag master LocalLastChangedAt
 }
 
 define behavior for ZI_RAP_Booking_JB alias Booking
+implementation in class zbp_i_rap_booking_JB unique
 persistent table zrap_abook_JB
+draft table zrap_dbook_JB
 lock dependent by _Travel
-//authorization dependent by <association>
+authorization dependent by _Travel
 etag master LocalLastChangedAt
 {
-  association _Travel;
-
   update;
   delete;
 
+  association _Travel { with draft; }
+
   field ( numbering : managed, readonly ) BookingUUID;
-  field ( readonly ) TravelUUID;
+  field ( readonly ) TravelUUID, BookingId;
+  field ( readonly ) CreatedBy, LastChangedBy, LocalLastChangedAt;
+
+  determination calculateBookingID  on modify { create; }
+  determination calculateTotalPrice on modify { field FlightPrice, CurrencyCode; }
 
   mapping for zrap_abook_JB
   {
