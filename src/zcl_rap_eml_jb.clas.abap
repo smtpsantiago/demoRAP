@@ -13,6 +13,24 @@ ENDCLASS.
 
 CLASS zcl_rap_eml_jb IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
+
+*  data mytravel type STANDARD TABLE OF ZC_RAP_Travel_JB.
+*  mytravel =
+*
+*  VALUE #(
+*( TravelUUID = '2C4500C0E4B44E02190094000B1614FC' TravelID = '00000004' AgencyID = '070042' AgencyName = 'The Ultimate Answer' CustomerID = '000665' CustomerName = 'Madeira' BeginDate = '20240406' EndDate = '20250202' BookingFee = '40.00 '
+*TotalPrice = '1871.00 ' CurrencyCode = 'USD' Description = 'Vacation' TravelStatus = 'O' LastChangedAt = '20240402211611.0000000 ' LocalLastChangedAt = '20240402211611.0000000 '  )
+*( TravelUUID = '6F4500C0E4B44E02190094000B1614FC' TravelID = '00000071' AgencyID = '070042' AgencyName = 'The Ultimate Answer' CustomerID = '000050' CustomerName = 'Fischmann' BeginDate = '20240408' EndDate = '20240408' BookingFee = '10.00 '
+*TotalPrice = '804.00 ' CurrencyCode = 'USD' Description = 'Vacation' TravelStatus = 'O' LastChangedAt = '20240325205132.0000000 ' LocalLastChangedAt = '20240325205132.0000000 '  )
+*( TravelUUID = '704500C0E4B44E02190094000B1614FC' TravelID = '00000072' AgencyID = '070042' AgencyName = 'The Ultimate Answer' CustomerID = '000605' CustomerName = 'Prinz' BeginDate = '20240408' EndDate = '20240408' BookingFee = '20.00 '
+*TotalPrice = '1638.00 ' CurrencyCode = 'USD' Description = 'Vacation' TravelStatus = 'O' LastChangedAt = '20240329062111.0000000 ' LocalLastChangedAt = '20240329062111.0000000 '  )
+*( TravelUUID = 'A24500C0E4B44E02190094000B1614FC' TravelID = '00000122' AgencyID = '070042' AgencyName = 'The Ultimate Answer' CustomerID = '000633' CustomerName = 'Lindwurm' BeginDate = '20240402' EndDate = '20250129' BookingFee = '100.00 '
+*TotalPrice = '28640.00 ' CurrencyCode = 'EUR' Description = 'Vacation' TravelStatus = 'O' LastChangedAt = '20240401234845.0000000 ' LocalLastChangedAt = '20240401234845.0000000 '  )
+*( TravelUUID = 'A44500C0E4B44E02190094000B1614FC' TravelID = '00000124' AgencyID = '070042' AgencyName = 'The Ultimate Answer' CustomerID = '000457' CustomerName = 'Benjamin' BeginDate = '20240402' EndDate = '20250129' BookingFee = '100.00 '
+*TotalPrice = '28603.00 ' CurrencyCode = 'EUR' Description = 'Vacation' TravelStatus = 'O' LastChangedAt = '20240322182920.0000000 ' LocalLastChangedAt = '20240322182920.0000000 '  )
+*( TravelUUID = 'CB4500C0E4B44E02190094000B1614FC' TravelID = '00000163' AgencyID = '070042' AgencyName = 'The Ultimate Answer' CustomerID = '000216' CustomerName = 'Mechler' BeginDate = '20240402' EndDate = '20250129' BookingFee = '50.00 '
+*TotalPrice = '16490.00 ' CurrencyCode = 'EUR' Description = 'Vacation' TravelStatus = 'O' LastChangedAt = '20240322050316.0000000 ' LocalLastChangedAt = '20240322050316.0000000 '  )
+* ).
 **        step 1
 *    read ENTITIES OF ZI_RAP_Travel_JB
 *        ENTITY Travel

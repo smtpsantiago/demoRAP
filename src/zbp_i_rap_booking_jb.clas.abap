@@ -1,15 +1,5 @@
-class ZBP_I_RAP_BOOKING_JB definition
-  public
-  abstract
-  final
-  create public .
-
-public section.
-protected section.
-private section.
+CLASS zbp_i_rap_booking_jb DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_rap_travel_jb.
 ENDCLASS.
 
-
-
-CLASS ZBP_I_RAP_BOOKING_JB IMPLEMENTATION.
+CLASS zbp_i_rap_booking_jb IMPLEMENTATION.
 ENDCLASS.
