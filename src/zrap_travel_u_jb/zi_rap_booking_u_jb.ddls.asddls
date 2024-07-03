@@ -2,11 +2,9 @@
 @Metadata.ignorePropagatedAnnotations: true
 
 
-define view entity ZI_RAP_Booking_U_JB
-  as select from /dmo/booking
+define view entity ZI_RAP_Booking_U_JB as select from /dmo/booking
   
-  association        to parent ZI_RAP_Travel_U_JB as _Travel     on  $projection.TravelID = _Travel.TravelID
-
+  association to parent ZI_RAP_Travel_U_JB as _Travel     on  $projection.TravelID = _Travel.TravelID
   association [1..1] to /DMO/I_Carrier    as _Carrier    on  $projection.CarrierID = _Carrier.AirlineID
   association [1..1] to /DMO/I_Customer   as _Customer   on  $projection.CustomerID = _Customer.CustomerID
   association [1..1] to /DMO/I_Connection as _Connection on  $projection.CarrierID    = _Connection.AirlineID
@@ -26,9 +24,6 @@ define view entity ZI_RAP_Booking_U_JB
       @Semantics.amount.currencyCode: 'CurrencyCode'
       flight_price  as FlightPrice,
       currency_code as CurrencyCode,
-
-
-
       /* associations */
       _Travel,
       _Carrier,
